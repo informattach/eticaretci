@@ -8,7 +8,6 @@ def calculate_price(price_str):
     try:
         clean_str = str(price_str).replace('$', '').replace(' ', '').replace(chr(160), '').replace(',', '.')
         price = float(clean_str)
-        return price
     except ValueError:
         return None
 
@@ -23,8 +22,7 @@ with col2:
 
 if ebay_file and easync_file:
     try:
-        # eBay dosyasındaki uzun ItemID'lerin bozulmaması için (dtype=str) olarak okuyoruz. Bu kritik bir adımdır.
         df_ebay = pd.read_csv(ebay_file, low_memory=False, dtype=str)
         df_easync = pd.read_csv(easync_file, low_memory=False)
     except Exception as e:
-        st.error(f"Dosyalar yüklenirken bir hata oluştu: {e}")
+        st.error(f"Dosya yüklenirken hata oluştu: {e}")
